@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import api from "./routes/api";
 
 const app = express();
 const port = 3000;
@@ -12,6 +13,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use("/api", api);
 
 app.get("/test", (req: any, res: any) => {
   res.status(200).send("Hello from server");
