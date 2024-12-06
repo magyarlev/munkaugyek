@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-import Item from "../modules/user";
+import Item from "../modules/item";
 import User from "../modules/user";
 
 const router = express.Router();
@@ -15,7 +15,7 @@ mongoose
     console.error(error);
   });
 
-router.get("/item", async (req: Request, res: Response) => {
+router.get("/items", async (req: Request, res: Response) => {
   try {
     let items = await Item.find({});
     res.status(200).json(items);
@@ -25,7 +25,7 @@ router.get("/item", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/item", async (req: Request, res: Response) => {
+router.post("/items", async (req: Request, res: Response) => {
   try {
     const newItem = new Item({
       name: req.body.name,
@@ -34,24 +34,24 @@ router.post("/item", async (req: Request, res: Response) => {
       id: req.body.id,
     });
     const registeredItem = await newItem.save();
-    res.status(200).send("Item registered successfully").json(registeredItem);
+    res.status(200).json(registeredItem);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error.");
   }
 });
 
-router.put("/item", async (req: Request, res: Response) => {
+router.put("/items", async (req: Request, res: Response) => {
   try {
     const item = req.body;
-    await item.findByIdAndUpdate(item._id, item);
+    await Item.findByIdAndUpdate(item._id, item);
     res.status(200).send("Item updated successfully");
   } catch (error) {
     res.status(500).send("Internal server error");
   }
 });
 
-router.delete("/item", async (req: Request, res: Response) => {
+router.delete("/items", async (req: Request, res: Response) => {
   try {
     const itemId = req.body._id;
     await Item.findByIdAndDelete(itemId);
@@ -69,7 +69,7 @@ router.post("/user", async (req: Request, res: Response) => {
       password: req.body.password,
     });
     const registeredUser = await newUser.save();
-    res.status(200).send("User created successfully").json(registeredUser);
+    res.status(200).send("User created successfully");
   } catch (error) {
     res.status(500).send("Internal server error");
   }
