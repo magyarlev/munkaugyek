@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import Item from "../modules/user";
+import User from "../modules/user";
 
 const router = express.Router();
 const db = "mongodb://localhost:27017/munkaügyek";
@@ -62,7 +63,7 @@ router.delete("/item", async (req: Request, res: Response) => {
 
 router.post("/user", async (req: Request, res: Response) => {
   try {
-    const newUser = new Item({
+    const newUser = new User({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
@@ -76,10 +77,11 @@ router.post("/user", async (req: Request, res: Response) => {
 
 router.put("/user", async (req: Request, res: Response) => {
   try {
-    const user = req.body;
-    await user.findByIdAndUpdate(user._id, user);
+    const updatedUser = req.body;
+    await User.findByIdAndUpdate(updatedUser._id, updatedUser);
     res.status(200).send("User updated successfully");
   } catch (error) {
+    console.error(error);
     res.status(500).send("Internal server error");
   }
 });
@@ -87,7 +89,7 @@ router.put("/user", async (req: Request, res: Response) => {
 router.delete("/user", async (req: Request, res: Response) => {
   try {
     const userId = req.body._id;
-    await Item.findByIdAndDelete(userId);
+    await User.findByIdAndDelete(userId);
     res.status(200).send("User deleted successfully");
   } catch (error) {
     res.status(500).send("Internal server error");
