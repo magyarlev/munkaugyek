@@ -1,9 +1,6 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-import Cases from "../modules/cases";
-import User from "../modules/user";
-import { emitWarning } from "process";
-import user from "../modules/user";
+import Item from "../modules/user";
 
 const router = express.Router();
 const db = "mongodb://localhost:27017/munkaügyek";
@@ -17,19 +14,55 @@ mongoose
     console.error(error);
   });
 
-router.get("/cases", async (req: Request, res: Response) => {
+router.get("/item", async (req: Request, res: Response) => {
   try {
-    let cases = await Cases.find({});
-    res.status(200).json(cases);
+    let items = await Item.find({});
+    res.status(200).json(items);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error.");
   }
 });
 
+router.post("/item", async (req: Request, res: Response) => {
+  try {
+    const newItem = new Item({
+      name: req.body.name,
+      author: req.body.author,
+      description: req.body.description,
+      id: req.body.id,
+    });
+    const registeredItem = await newItem.save();
+    res.status(200).send("Item registered successfully").json(registeredItem);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error.");
+  }
+});
+
+router.put("/item", async (req: Request, res: Response) => {
+  try {
+    const item = req.body;
+    await item.findByIdAndUpdate(item._id, item);
+    res.status(200).send("Item updated successfully");
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
+});
+
+router.delete("/item", async (req: Request, res: Response) => {
+  try {
+    const itemId = req.body._id;
+    await Item.findByIdAndDelete(itemId);
+    res.status(200).send("Item deleted successfully");
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
+});
+
 router.post("/user", async (req: Request, res: Response) => {
   try {
-    const newUser = new User({
+    const newUser = new Item({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
@@ -41,10 +74,20 @@ router.post("/user", async (req: Request, res: Response) => {
   }
 });
 
+router.put("/user", async (req: Request, res: Response) => {
+  try {
+    const user = req.body;
+    await user.findByIdAndUpdate(user._id, user);
+    res.status(200).send("User updated successfully");
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
+});
+
 router.delete("/user", async (req: Request, res: Response) => {
   try {
     const userId = req.body._id;
-    await user.findById(userId).deleteOne();
+    await Item.findByIdAndDelete(userId);
     res.status(200).send("User deleted successfully");
   } catch (error) {
     res.status(500).send("Internal server error");
