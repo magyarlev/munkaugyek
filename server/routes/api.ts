@@ -44,8 +44,12 @@ router.post("/items", async (req: Request, res: Response) => {
 router.put("/items", async (req: Request, res: Response) => {
   try {
     const item = req.body;
-    await Item.findByIdAndUpdate(item._id, item);
-    res.status(200).send("Item updated successfully");
+    const updatedItem = await Item.findByIdAndUpdate(item._id, item);
+    if (updatedItem) {
+      res.status(200).send("Item updated successfully");
+    } else {
+      res.status(500).send("Item not found");
+    }
   } catch (error) {
     res.status(500).send("Internal server error");
   }
@@ -77,9 +81,13 @@ router.post("/user", async (req: Request, res: Response) => {
 
 router.put("/user", async (req: Request, res: Response) => {
   try {
-    const updatedUser = req.body;
-    await User.findByIdAndUpdate(updatedUser._id, updatedUser);
-    res.status(200).send("User updated successfully");
+    const user = req.body;
+    const updatedUserData = await User.findByIdAndUpdate(user._id, user);
+    if (updatedUserData) {
+      res.status(200).send("User updated successfully");
+    } else {
+      res.status(500).send("User not found");
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
