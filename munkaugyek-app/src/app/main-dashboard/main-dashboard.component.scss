@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  .sidebar {
+    overflow: hidden;
+    position: fixed;
+    top: 100px;
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    &.categories-wrapper {
+      left: 200px;
+    }
+    &.user-display {
+      right: 200px;
+    }
+  }
+  .main-content-wrapper {
+    overflow-y: auto;
+    margin: 0 auto;
+    width: 800px;
+  }
+  button {
+    background-color: pink;
+    color: black;
+    width: 120px;
+  }
+}

@@ -4,7 +4,12 @@ nav,
   justify-content: space-around;
 }
 nav {
-  padding-top: 20px;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  background-color: white;
   .logo {
     font-size: 2em;
     font-weight: bold;
@@ -30,4 +35,8 @@ nav {
       width: 100%;
     }
   }
+}
+
+.dashboard-wrapper {
+  margin-top: 80px;
 }
