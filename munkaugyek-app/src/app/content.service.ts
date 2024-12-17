@@ -4,6 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ContentService {
+  getAllItems() {}
+  getItemById() {}
+  addNewItem() {}
+  deleteItem() {}
+  updateItem() {}
+
   #items = [
     {
       name: 'test1',
