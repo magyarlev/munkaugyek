@@ -21,6 +21,9 @@
     overflow-y: auto;
     margin: 0 auto;
     width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
   button {
     background-color: pink;
