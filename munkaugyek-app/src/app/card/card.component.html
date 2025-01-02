@@ -1,17 +1,16 @@
 <mat-card class="card" appearance="outlined">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ item().name }}</mat-card-title>
-    <mat-card-subtitle>Poster</mat-card-subtitle>
+    <mat-card-title class="text">{{ item().name }}</mat-card-title>
+    <mat-card-subtitle class="text">Poster</mat-card-subtitle>
   </mat-card-header>
   <div>{{ item().image }}</div>
   <mat-card-content>
-    <p>
+    <p class="text">
       {{ item().description }}
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-button class="text">LIKE</button>
+    <button mat-button class="text">SHARE</button>
   </mat-card-actions>
 </mat-card>
