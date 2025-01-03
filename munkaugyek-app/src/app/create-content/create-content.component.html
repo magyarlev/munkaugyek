@@ -8,19 +8,19 @@
       <input type="text" placeholder="*NAME" id="name" />
       <label for="description">Állítmány:</label>
       <textarea id="description" placeholder="*DESCRIPTION"></textarea>
-      <input type="file" />
+      <input type="file" disabled />
       <div class="btn-wrapper">
         <button
           mat-flat-button
           color="primary"
-          (click)="expansionModuleExpanded = false"
+          (click)="expansionModuleExpanded = !expansionModuleExpanded"
         >
           Send
         </button>
         <button
           mat-flat-button
           color="warn"
-          (click)="expansionModuleExpanded = false"
+          (click)="expansionModuleExpanded = !expansionModuleExpanded"
         >
           Cancel
         </button>
