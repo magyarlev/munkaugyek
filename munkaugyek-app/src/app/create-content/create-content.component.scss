@@ -3,9 +3,19 @@ form {
   flex-direction: column;
   gap: 20px;
   margin: 0 auto;
-  input {
+  input,
+  textarea {
     padding: 15px;
     border-radius: 15px;
+    width: 100%;
+    border: 1px solid steelblue;
+    &:focus {
+      outline: steelblue;
+      box-shadow: 0 0 5px 0 steelblue;
+    }
+  }
+  textarea {
+    resize: vertical;
   }
 }
 
@@ -16,6 +26,5 @@ form {
 
 mat-expansion-panel.mat-expansion-panel.ng-tns-c857250080-0.mat-expanded.mat-expansion-panel-spacing,
 mat-expansion-panel.mat-expansion-panel.ng-tns-c857250080-0 {
-  // background-color: steelblue;
   border-radius: 20px;
 }

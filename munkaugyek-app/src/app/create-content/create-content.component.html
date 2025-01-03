@@ -1,17 +1,29 @@
-<mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel class="main">
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel class="main" [expanded]="expansionModuleExpanded">
     <mat-expansion-panel-header>
       <mat-panel-title> Create New </mat-panel-title>
     </mat-expansion-panel-header>
     <form>
-      <label for="name">Alany neve:</label>
+      <label for="name">Alany:</label>
       <input type="text" placeholder="*NAME" id="name" />
-      <label for="description">Leírás:</label>
-      <input type="textarea" placeholder="*DESCRIPTION" id="description" />
+      <label for="description">Állítmány:</label>
+      <textarea id="description" placeholder="*DESCRIPTION"></textarea>
       <input type="file" />
       <div class="btn-wrapper">
-        <button mat-flat-button color="primary">Send</button>
-        <button mat-flat-button color="warn">Cancel</button>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="expansionModuleExpanded = false"
+        >
+          Send
+        </button>
+        <button
+          mat-flat-button
+          color="warn"
+          (click)="expansionModuleExpanded = false"
+        >
+          Cancel
+        </button>
       </div>
     </form>
   </mat-expansion-panel>

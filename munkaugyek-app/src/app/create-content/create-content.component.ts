@@ -9,4 +9,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   templateUrl: './create-content.component.html',
   styleUrl: './create-content.component.scss',
 })
-export class CreateContentComponent {}
+export class CreateContentComponent {
+  expansionModuleExpanded = true;
+}
