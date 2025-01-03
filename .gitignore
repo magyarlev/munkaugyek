@@ -1,2 +1,4 @@
 server/node_modules
+munkaugyek-app/node_modules
 .vscode
+.angular
