@@ -6,6 +6,9 @@
     <form [formGroup]="itemForm">
       <label for="name">Alany:</label>
       <input type="text" placeholder="*NAME" id="name" formControlName="name" />
+      @if (itemForm.get('name')?.hasError('required')) {
+      <mat-error>Add meg az Alany nevét</mat-error>
+      }
       <label for="description">Állítmány:</label>
       <textarea
         id="description"

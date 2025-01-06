@@ -9,11 +9,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { ContentService } from '../content.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-create-content',
   standalone: true,
-  imports: [MatButtonModule, MatExpansionModule, ReactiveFormsModule],
+  imports: [
+    MatButtonModule,
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+  ],
   templateUrl: './create-content.component.html',
   styleUrl: './create-content.component.scss',
 })
