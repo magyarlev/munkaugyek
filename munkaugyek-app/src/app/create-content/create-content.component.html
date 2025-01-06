@@ -3,20 +3,18 @@
     <mat-expansion-panel-header>
       <mat-panel-title> Create New </mat-panel-title>
     </mat-expansion-panel-header>
-    <form>
+    <form [formGroup]="itemForm">
       <label for="name">Alany:</label>
-      <input type="text" placeholder="*NAME" id="name" />
+      <input type="text" placeholder="*NAME" id="name" formControlName="name" />
       <label for="description">Állítmány:</label>
-      <textarea id="description" placeholder="*DESCRIPTION"></textarea>
+      <textarea
+        id="description"
+        placeholder="*DESCRIPTION"
+        formControlName="description"
+      ></textarea>
       <input type="file" disabled />
       <div class="btn-wrapper">
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="expansionModuleExpanded = !expansionModuleExpanded"
-        >
-          Send
-        </button>
+        <button mat-flat-button color="primary" (click)="onSend()">Send</button>
         <button
           mat-flat-button
           color="warn"
