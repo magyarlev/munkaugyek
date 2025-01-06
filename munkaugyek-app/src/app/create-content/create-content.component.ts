@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { Item } from '../types';
 import {
   FormControl,
@@ -18,6 +18,8 @@ import { ContentService } from '../content.service';
   styleUrl: './create-content.component.scss',
 })
 export class CreateContentComponent {
+  accordion = viewChild.required(MatAccordion);
+
   expansionModuleExpanded = true;
   newItem: Item = { name: '', description: '', image: '' };
   contentService = inject(ContentService);
@@ -32,6 +34,6 @@ export class CreateContentComponent {
       name: this.itemForm.value.name ?? '',
       description: this.itemForm.value.description ?? '',
     });
-    this.expansionModuleExpanded = !this.expansionModuleExpanded;
+    this.accordion().closeAll();
   }
 }

@@ -15,11 +15,7 @@
       <input type="file" disabled />
       <div class="btn-wrapper">
         <button mat-flat-button color="primary" (click)="onSend()">Send</button>
-        <button
-          mat-flat-button
-          color="warn"
-          (click)="expansionModuleExpanded = !expansionModuleExpanded"
-        >
+        <button mat-flat-button color="warn" (click)="accordion().closeAll()">
           Cancel
         </button>
       </div>
