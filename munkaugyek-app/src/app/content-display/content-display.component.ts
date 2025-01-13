@@ -12,9 +12,5 @@ import { CardComponent } from '../card/card.component';
 })
 export class ContentDisplayComponent {
   contentService = inject(ContentService);
-  items: Item[] = [];
-
-  constructor() {
-    this.items = this.contentService.getItems();
-  }
+  items: Item[] = this.contentService.getItems();
 }
