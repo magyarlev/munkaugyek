@@ -4,6 +4,8 @@ import { ContentDisplayComponent } from './content-display.component';
 import { provideHttpClient } from '@angular/common/http';
 import { CardComponent } from '../card/card.component';
 import { ContentService } from '../content.service';
+import { delay, of } from 'rxjs';
+import { Item } from '../types';
 
 class MockCardComponent {}
 
@@ -32,9 +34,9 @@ describe('ContentDisplayComponent', () => {
       ],
     }).compileComponents();
 
-    mockContentService.getItems.and.returnValue([
-      { name: 'test', description: 'test', image: 'test' },
-    ]);
+    mockContentService.getItems.and.returnValue(
+      of([{ name: 'test', description: 'test', image: 'test' }])
+    );
 
     fixture = TestBed.createComponent(ContentDisplayComponent);
     component = fixture.componentInstance;
@@ -45,25 +47,38 @@ describe('ContentDisplayComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should have one item in the items array', () => {
-    expect(component.items.length).toBe(1);
+    let asyncItems: Item[] = [];
+    component.items$.subscribe((items) => {
+      asyncItems = items;
+      expect(asyncItems.length).toBe(1);
+    });
   });
   it('should display two card components', () => {
-    component.items.push(
-      {
-        name: 'test1',
-        description: 'test1',
-        image: 'test1',
-      },
-      {
-        name: 'test2',
-        description: 'test2',
-        image: 'test2',
-      }
+    mockContentService.getItems.and.returnValue(
+      of([
+        { name: 'test', description: 'test', image: 'test' },
+        {
+          name: 'test1',
+          description: 'test1',
+          image: 'test1',
+        },
+        {
+          name: 'test2',
+          description: 'test2',
+          image: 'test2',
+        },
+      ]).pipe(delay(2000))
     );
-    fixture.detectChanges();
-    expect(component.items.length).toBe(3);
 
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelectorAll('app-card').length).toBe(3);
+    component.items$ = mockContentService.getItems();
+    fixture.detectChanges();
+
+    let asyncItems: Item[] = [];
+    component.items$.subscribe((items) => {
+      asyncItems = items;
+      expect(asyncItems.length).toBe(3);
+      const compiled = fixture.nativeElement as HTMLElement;
+      expect(compiled.querySelectorAll('app-card').length).toBe(3);
+    });
   });
 });

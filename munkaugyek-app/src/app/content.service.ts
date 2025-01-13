@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Item } from './types';
+import { delay, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -67,6 +68,6 @@ export class ContentService {
   ];
 
   getItems() {
-    return this.#items;
+    return of(this.#items).pipe(delay(2000));
   }
 }
