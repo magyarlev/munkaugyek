@@ -9,7 +9,9 @@ import { delay, of } from 'rxjs';
 export class ContentService {
   #httpClient = inject(HttpClient);
   #itemUrl = 'localhost:3000/api';
-  getAllItems() {}
+  getAllItems() {
+    return this.#httpClient.get<Item[]>(`${this.#itemUrl}/items`);
+  }
   getItemById() {}
 
   addNewItem(item: Item) {
@@ -18,56 +20,4 @@ export class ContentService {
 
   deleteItem() {}
   updateItem() {}
-
-  #items = [
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-    {
-      name: 'test1',
-      description: 'testtest111',
-      image: 'here is an image',
-    },
-  ];
-
-  getItems() {
-    return of(this.#items).pipe(delay(2000));
-  }
 }

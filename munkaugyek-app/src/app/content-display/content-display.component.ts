@@ -14,5 +14,5 @@ import { AsyncPipe } from '@angular/common';
 })
 export class ContentDisplayComponent {
   contentService = inject(ContentService);
-  items$: Observable<Item[]> = this.contentService.getItems();
+  items$: Observable<Item[]> = this.contentService.getAllItems();
 }

@@ -27,7 +27,7 @@ export class CreateContentComponent {
   accordion = viewChild.required(MatAccordion);
 
   expansionModuleExpanded = true;
-  newItem: Item = { name: '', description: '', image: '' };
+  newItem: Item = { name: '', description: '', image: '', author: '' };
   contentService = inject(ContentService);
 
   itemForm = new FormGroup({
@@ -39,6 +39,8 @@ export class CreateContentComponent {
     this.contentService.addNewItem({
       name: this.itemForm.value.name ?? '',
       description: this.itemForm.value.description ?? '',
+      image: '',
+      author: '',
     });
     this.accordion().closeAll();
   }

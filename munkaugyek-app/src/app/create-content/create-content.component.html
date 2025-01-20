@@ -3,18 +3,34 @@
     <mat-expansion-panel-header>
       <mat-panel-title> Create New </mat-panel-title>
     </mat-expansion-panel-header>
+
     <form [formGroup]="itemForm">
-      <label for="name">Alany:</label>
-      <input type="text" placeholder="*NAME" id="name" formControlName="name" />
-      @if (itemForm.get('name')?.hasError('required')) {
-      <mat-error>Add meg az Alany nevét</mat-error>
-      }
-      <label for="description">Állítmány:</label>
-      <textarea
-        id="description"
-        placeholder="*DESCRIPTION"
-        formControlName="description"
-      ></textarea>
+      <mat-form-field>
+        <mat-label>Alany:</mat-label>
+        <input
+          matInput
+          placeholder="*NAME"
+          [formControl]="itemForm.controls.name"
+          required
+        />
+        @if (itemForm.get('name')?.hasError('required')) {
+        <mat-error>Add meg az alany nevét!</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Állítmány:</mat-label>
+        <textarea
+          matInput
+          placeholder="*DESCRIPTION"
+          [formControl]="itemForm.controls.description"
+          required
+        ></textarea>
+        @if (itemForm.get('description')?.hasError('required')) {
+        <mat-error>Add meg az állítmányt!</mat-error>
+        }
+      </mat-form-field>
+
       <input type="file" disabled />
       <div class="btn-wrapper">
         <button mat-flat-button color="primary" (click)="onSend()">Send</button>
