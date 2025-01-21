@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { ContentService } from '../content.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-create-content',
@@ -19,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatExpansionModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './create-content.component.html',
   styleUrl: './create-content.component.scss',
